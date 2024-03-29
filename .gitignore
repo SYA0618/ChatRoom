@@ -2,4 +2,4 @@
 *.env
 
 # 忽略db資料夾
-./back-end/db 
+back-end/db 
