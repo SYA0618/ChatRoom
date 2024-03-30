@@ -21,6 +21,7 @@ func Init() {
 	apiV1 := router.Group("/api/v1")
 	{
 		apiV1.POST("/login", v1.Login)
+		apiV1.POST("/register", v1.Register)
 	}
 	webPort := fmt.Sprintf("127.0.0.1:%s", port)
 	router.Run(webPort)
