@@ -5,17 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SYA_LOGIN</title>
     <link rel="icon" href="./graph/pikachu.png" type="image/x-icon" /> 
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/reg_style.css" />
 </head>
 <body>
     <div class="wrapper">
         <div class="login_box">
           <div class="login-header">
-            <span>Login</span>
+            <span>Register</span>
+          </div>
+          <div id="register-error" class="register-error">
+            <span>
+                The username already exists.
+            </span>
           </div>
           <div>
-            <span id="login-error" class="login-error">
-              The username or password does not exist.
+            <span style="color: rgb(140, 232, 94);">
+                Please enter the username you desire.
             </span>
           </div>
           <div class="input_box">
@@ -24,34 +29,26 @@
             <i class="bx bx-user icon"></i>
           </div>
       
+          <div>
+            <span style="color: rgb(140, 232, 94);">
+                Please enter the password you desire.
+            </span>
+          </div>
           <div class="input_box">
             <input type="password" id="pass" class="input-field" required>
             <label for="pass" class="labelPass">Password</label>
             <i class="bx bx-lock-alt icon"></i>
           </div>
       
-          <div class="remember-forgot">
-            <div class="remember-me">
-              <input type="checkbox" id="remember">
-              <label for="remember">Remember me</label>
-            </div>
-      
-            <div class="forgot">
-              <a href="#">Forgot password?</a>
-            </div>
-          </div>
       
           <div class="input_box">
-            <input type="submit" class="input-submit" value="Login" id="btn_">
+            <input type="submit" class="input-submit" value="Sign up" id="btn_">
           </div>
-      
-          <div class="register">
-            <span>Don't have an account? <a href="register.html">Register</a></span>
-          </div>
+
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./js/login.js"></script>
+    <script src="./js/register.js"></script>
 </body>
 </html>
