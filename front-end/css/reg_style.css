@@ -117,13 +117,6 @@
   
   .labelUser {
     position: absolute;
-    top: 15px;
-    left: 20px;
-    transition: 0.2s;
-  }
-  
-  .labelUser.focus {
-    position: absolute;
     top: -10px;
     left: 20px;
     font-size: 14px;
@@ -132,15 +125,9 @@
     color: var(--black-color);
     padding: 0 10px;
   }
+  
 
   .labelPass {
-    position: absolute;
-    top: 15px;
-    left: 20px;
-    transition: 0.2s;
-  }
-  
-  .labelPass.focus {
     position: absolute;
     top: -10px;
     left: 20px;
@@ -158,11 +145,6 @@
     font-size: 20px;
   }
   
-  .remember-forgot {
-    display: flex;
-    justify-content: space-between;
-    font-size: 15px;
-  }
   
   .input-submit {
     width: 100%;
@@ -188,9 +170,12 @@
     font-weight: 500;
   }
 
-  .login-error {
+  .register-error {
     color: var(--error-color);
     visibility: hidden;
+    display: flex;
+    justify-content: center;
+    transform: translate(0%,-100%);
   }
 
   @media only screen and (max-width: 564px) {

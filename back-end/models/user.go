@@ -19,3 +19,10 @@ func (u *User) CheckUser() bool {
 	}
 	return true
 }
+
+func (u *User) RegisterUser() bool {
+	db := mysql.GetDB()
+	_, err := db.Exec("INSERT INTO `account` (`user_name`, `password`)VALUES (?, ?)", u.User, u.Password)
+
+	return err == nil
+}

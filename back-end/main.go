@@ -14,7 +14,6 @@ func main() {
 	err_mysql := mysql.Init()
 	checkErr(err_mysql)
 	router.Init()
-
 }
 
 func checkErr(err error) {
