@@ -18,10 +18,6 @@ func Init() error {
 	db_host := os.Getenv("DB")
 	host := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", user, password, db_host, db_port, db_name)
 	d, err := sql.Open("mysql", host)
-	if err != nil {
-		fmt.Println("資料庫連線錯誤，原因為：", err.Error())
-		return err
-	}
 	db = d
 	return err
 }
