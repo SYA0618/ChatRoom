@@ -1,34 +1,34 @@
 
-document.getElementById('btn_').addEventListener('click',(event)=>{
-    event.preventDefault();
-    submitForm();
+document.getElementById('btn_').addEventListener('click', (event) => {
+  event.preventDefault();
+  submitForm();
 });
 
 function submitForm() {
-    var username = document.getElementById('user').value;
-    var password = document.getElementById('pass').value;
-    if (username == '' || password == '') {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Please do not leave this field blank.",
-            footer: '<a href="#">Why do I have this issue?</a>'
-          });
-        return
-    }
-    var path = '/api/v1/login'
-    var data = new FormData();
-    data.append('user_name', username);
-    data.append('password', password);
+  var username = document.getElementById('user').value;
+  var password = document.getElementById('pass').value;
+  if (username == '' || password == '') {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Please do not leave this field blank.",
+      footer: '<a href="#">Why do I have this issue?</a>'
+    });
+    return
+  }
+  var path = '/v1/login'
+  var data = new FormData();
+  data.append('user_name', username);
+  data.append('password', password);
 
-    axios.post(path, data)
+  axios.post(path, data)
     .then(res => {
-        console.log(res);
-        window.location.href = '/welcome.html';
+      console.log(res);
+      window.location.href = '/welcome.html';
     })
     .catch(err => {
-        console.error(err);
-        showError(); 
+      console.error(err);
+      showError();
     });
 }
 
@@ -37,8 +37,8 @@ const inputPassword = document.getElementById('pass');
 const label = document.querySelector('.labelUser');
 const label1 = document.querySelector('.labelPass');
 
-inputPassword.addEventListener("keypress", (event)=> {
-  
+inputPassword.addEventListener("keypress", (event) => {
+
   if (event.key === 'Enter') {
     event.preventDefault();
     document.getElementById("btn_").click();
@@ -56,13 +56,13 @@ inputUser.addEventListener('blur', () => {
 });
 
 inputPassword.addEventListener('focus', () => {
-    label1.classList.add('focus');
+  label1.classList.add('focus');
 });
-  
+
 inputPassword.addEventListener('blur', () => {
-    if (inputPassword.value === '') {
-      label1.classList.remove('focus');
-    }
+  if (inputPassword.value === '') {
+    label1.classList.remove('focus');
+  }
 });
 
 // 获取错误消息元素
