@@ -3,6 +3,3 @@
 
 # 忽略db資料夾
 back-end/db
-
-# 忽略nginx資料夾
-nginx

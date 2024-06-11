@@ -11,7 +11,8 @@ import (
 func Init() {
 	port := os.Getenv("PORT")
 	router := gin.Default()
-	//router.Use(static.Serve("/", static.LocalFile("../front-end", true)))
+
+	// router.Use(static.Serve("/", static.LocalFile("../front-end", true)))
 	// router.GET("/", func(c *gin.Context) {
 	// 	c.String(http.StatusOK, "Hello")
 	// })

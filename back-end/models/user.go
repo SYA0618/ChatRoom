@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"webserver/service/mysql"
 )
 
@@ -23,6 +24,6 @@ func (u *User) CheckUser() bool {
 func (u *User) RegisterUser() bool {
 	db := mysql.GetDB()
 	_, err := db.Exec("INSERT INTO `account` (`user_name`, `password`)VALUES (?, ?)", u.User, u.Password)
-
+	fmt.Println(err)
 	return err == nil
 }
