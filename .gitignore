@@ -3,3 +3,5 @@
 
 # 忽略db資料夾
 back-end/db
+
+.DS_Store
