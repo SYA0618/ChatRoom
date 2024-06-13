@@ -3,6 +3,18 @@ version: '3.1'
 
  
 services:
+  app:
+    image: web-login
+    restart: always
+    ports:
+      - 127.0.0.1:8082:2996
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_PORT: ${DB_PORT}
+      PORT: ${PORT}
   db:
     image: mysql:8.3.0
     # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password

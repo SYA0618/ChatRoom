@@ -9,8 +9,8 @@ import (
 
 func main() {
 	/*loading .env*/
-	err_Env := godotenv.Load()
-	checkErr(err_Env)
+	godotenv.Load(".env.dev")
+	// checkErr(err_Env)
 	err_mysql := mysql.Init()
 	checkErr(err_mysql)
 	router.Init()
