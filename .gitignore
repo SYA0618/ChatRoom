@@ -1,5 +1,5 @@
 # 忽略所有附檔名是 .tmp 的檔案
-*.env
+*.env.*
 
 # 忽略db資料夾
 back-end/db
