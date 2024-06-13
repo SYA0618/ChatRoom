@@ -1,0 +1,56 @@
+info:
+  contact: {}
+paths:
+  /login:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Test user login
+      parameters:
+      - description: user
+        in: formData
+        name: user_name
+        required: true
+        type: string
+      - description: password
+        in: formData
+        name: password
+        required: true
+        type: string
+      produces:
+      - multipart/form-data
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: User login
+      tags:
+      - Login
+  /register:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Test user register
+      parameters:
+      - description: user
+        in: formData
+        name: user_name
+        required: true
+        type: string
+      - description: password
+        in: formData
+        name: password
+        required: true
+        type: string
+      produces:
+      - multipart/form-data
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: User register
+      tags:
+      - Register
+swagger: "2.0"
