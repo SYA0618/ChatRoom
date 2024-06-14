@@ -39,12 +39,8 @@ services:
       - 127.0.0.1:8080:80
 
   web:
-    image: nginx
+    image: web-page
     restart: always
-    volumes:
-      - ./front-end:/usr/share/nginx/html
-      - ./nginx/logs:/var/log/nginx  
-      - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
     ports:
       - "127.0.0.1:8081:80"
 
