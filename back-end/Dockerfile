@@ -1,8 +1,8 @@
 FROM golang:1.21.3-alpine3.18 AS build
 WORKDIR /app
-COPY go.mod go.sum ./
+COPY ./back-end/go.mod ./back-end/go.sum ./
 RUN go mod download
-COPY . .
+COPY ./back-end .
 RUN go build -o web-login-service .
 
 FROM alpine:3.18
