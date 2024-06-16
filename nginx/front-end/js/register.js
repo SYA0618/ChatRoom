@@ -15,7 +15,7 @@ function submitForm() {
         });
         return
     }
-    var path = '/v1/register'
+    var path = 'api/v1/register'
     var data = new FormData();
     var registerError = document.getElementById('register-error');
     data.append('user_name', username);
