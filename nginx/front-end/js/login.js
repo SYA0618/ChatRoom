@@ -16,7 +16,7 @@ function submitForm() {
     });
     return
   }
-  var path = '/v1/login'
+  var path = 'api/v1/login'
   var data = new FormData();
   data.append('user_name', username);
   data.append('password', password);
