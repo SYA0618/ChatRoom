@@ -1,0 +1,69 @@
+html {
+    overflow: hidden;
+}
+
+:root {
+    --primary-color: #c6c3c3;
+    --second-color: #ffffff;
+    --black-color: #000000;
+    --error-color: #efa2a2;
+}
+
+body {
+    background-image: url("../graph/login_bg.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.window {
+    position: relative;
+    width: 700px;
+    height: 800px;
+    backdrop-filter: blur(25px);
+    border: 2px solid var(--primary-color);
+    border-radius: 15px;
+    padding: 7.5em 2.5em 4em 2.5em;
+    color: var(--second-color);
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden; /* 防止內容溢出 */
+}
+
+.chat {
+    flex-grow: 1; /* 允許 chat 根據內容自動擴展 */
+    max-height: calc(100% - 60px); /* 限制最大高度，60px 預留給表單 */
+    overflow-y: auto; /* 內容過多時可滾動 */
+}
+
+#form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 10px; /* 增加表單上方的間隙 */
+    padding-bottom: 10px; /* 增加表單下方的間隙 */
+}
+
+#msg {
+    border-radius: 15px;
+    flex-grow: 1;
+    padding: 10px;
+}
+
+#btn {
+    border-radius: 15px;
+    padding: 10px 20px;
+}
