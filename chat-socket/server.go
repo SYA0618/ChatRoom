@@ -8,5 +8,7 @@ import (
 
 func main() {
 	router := mux.NewRouter()
+	go hub.Center.Run()
+	router.HandleFunc("/ws", )
 
 }
