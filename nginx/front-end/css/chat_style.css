@@ -1,12 +1,13 @@
 html {
     overflow: hidden;
+    height: 100%;
 }
 
 :root {
-    --primary-color: #c6c3c3;
-    --second-color: #ffffff;
-    --black-color: #000000;
-    --error-color: #efa2a2;
+    --primary-color: #4a76a8; /* 柔和的藍色 */
+    --second-color: #ffffff; /* 白色 */
+    --black-color: #2c2c2c; /* 柔和的黑色 */
+    --error-color: #d9534f; /* Bootstrap 預設的錯誤顏色 */
 }
 
 body {
@@ -15,6 +16,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    font-family: 'Open Sans', sans-serif; /* 添加 Google 字型 */
 }
 
 .wrapper {
@@ -23,47 +25,73 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: rgba(0, 0, 0, 0.2);
+    /* background-color: rgba(0, 0, 0, 0.3); 略為加深的遮罩層，以提高可讀性 */
 }
 
 .window {
     position: relative;
-    width: 700px;
-    height: 800px;
-    backdrop-filter: blur(25px);
-    border: 2px solid var(--primary-color);
-    border-radius: 15px;
-    padding: 7.5em 2.5em 4em 2.5em;
+    width: 60%; /* 動態寬度 */
+    max-width: 800px; /* 最大寬度 */
+    min-width: 320px; /* 最小寬度 */
+    height: 90vh; /* 依據視窗的動態高度 */
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 20px;
     color: var(--second-color);
-    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden; /* 防止內容溢出 */
 }
 
 .chat {
-    flex-grow: 1; /* 允許 chat 根據內容自動擴展 */
-    max-height: calc(100% - 60px); /* 限制最大高度，60px 預留給表單 */
-    overflow-y: auto; /* 內容過多時可滾動 */
+    flex-grow: 1;
+    overflow-y: auto; /* 確保可滾動 */
+    padding: 15px; /* 增加填充 */
+    margin-bottom: 10px; /* 在表單之前留出空間 */
 }
 
 #form {
     display: flex;
     gap: 10px;
-    align-items: center;
-    margin-top: 20px;
-    padding-top: 10px; /* 增加表單上方的間隙 */
-    padding-bottom: 10px; /* 增加表單下方的間隙 */
+    padding: 10px 0; /* 統一填充 */
 }
 
 #msg {
-    border-radius: 15px;
     flex-grow: 1;
-    padding: 10px;
+    border: 1px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 16px; /* 增大字體，提高可讀性 */
 }
 
 #btn {
-    border-radius: 15px;
+    background-color: var(--primary-color);
+    border: none;
+    color: var(--second-color);
+    border-radius: 12px;
     padding: 10px 20px;
+    cursor: pointer; /* 滑鼠懸停時的光標效果 */
+    transition: background-color 0.3s ease; /* 按鈕背景色的平滑過渡 */
+}
+
+#btn:hover {
+    background-color: darken(var(--primary-color), 10%);
+}
+
+#user_num {
+    color: blue;
+}
+.online {
+    width: 200px;
+    height: 300px;
+    float: left;
+    text-align: left;
+    padding: 10px;
+    border-right: 2px solid var(--primary-color); /* 原有的分隔線 */
+    border: 1px solid var(--primary-color); /* 新增的整體外框 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 輕微的陰影以增加深度感 */
+    background-color: rgba(167, 234, 193, 0.8); /* 背景色增加透明度以融入背景圖 */
+    border-radius: 12px; /* 圓角邊框 */
 }

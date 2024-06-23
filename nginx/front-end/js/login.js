@@ -23,6 +23,7 @@ function submitForm() {
   axios.post(path, data)
     .then(res => {
       console.log(res);
+      sessionStorage.setItem('user_name', username);
       window.location.href = '/welcome.html';
     })
     .catch(err => {

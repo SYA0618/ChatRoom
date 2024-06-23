@@ -14,11 +14,11 @@ import (
 func Init() {
 	port := os.Getenv("PORT")
 	router := gin.Default()
-
 	// router.Use(static.Serve("/", static.LocalFile("../front-end", true)))
 	// router.GET("/", func(c *gin.Context) {
 	// 	c.String(http.StatusOK, "Hello")
 	// })
+
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	apiV1 := router.Group("/v1")
 	{

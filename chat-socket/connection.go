@@ -30,26 +30,26 @@ type Data struct {
 var wu = &websocket.Upgrader{ReadBufferSize: 512,
 	WriteBufferSize: 512, CheckOrigin: func(r *http.Request) bool { return true }}
 
-// websocket服务
+// websocket服務
 func myws(w http.ResponseWriter, r *http.Request) {
-	//协议升级
+	//協議upgrade
 	ws, err := wu.Upgrade(w, r, nil)
 	if err != nil {
 		return
 	}
-	//创建连接
+	//創建連接
 	c := &connection{sc: make(chan []byte, 256), ws: ws, data: &Data{}}
 	//connection加入hub管理
 	h.r <- c
 	go c.writer()
 	c.reader()
-	//退出登录
+	//推出登入
 	defer logout(c)
 }
 
-// 数据写入器
+// 數據寫入
 func (c *connection) writer() {
-	//取出发送信息并写入
+	//取出發送訊息並寫入
 	for message := range c.sc {
 		fmt.Println(message, "\n")
 		c.ws.WriteMessage(websocket.TextMessage, message)
@@ -57,41 +57,41 @@ func (c *connection) writer() {
 	c.ws.Close()
 }
 
-// 数据读取器
+// 數據讀取
 func (c *connection) reader() {
 	for {
-		//接收ws信息
+		//接收websocket訊息
 		_, message, err := c.ws.ReadMessage()
 		if err != nil {
 			h.r <- c
 			break
 		}
 		json.Unmarshal(message, &c.data)
-		//解析信息类型
+		//解析訊息類型
 		switch c.data.Type {
-		//用户登录
+		//User登入
 		case "login":
 			c.data.User = c.data.Content
 			c.data.From = c.data.User
-			//在线人数增加
+			//在線人數更新
 			user_list = append(user_list, c.data.User)
 			c.data.UserList = user_list
 			data_b, _ := json.Marshal(c.data)
-			//发送信息
+			//訊息發送
 			h.b <- data_b
 		case "user":
 			c.data.Type = "user"
 			data_b, _ := json.Marshal(c.data)
 			h.b <- data_b
-		//用户登出
+		//用戶登出
 		case "logout":
 			c.data.Type = "logout"
-			//在线人数减少
+			//在線人數減少
 			user_list = del(user_list, c.data.User)
 			data_b, _ := json.Marshal(c.data)
-			//删除连接
+			//刪除連接
 			h.b <- data_b
-			//发送用户离线信息
+			//發送用戶登出訊息
 			h.r <- c
 		default:
 			fmt.Print("========default================")
@@ -99,7 +99,7 @@ func (c *connection) reader() {
 	}
 }
 
-// 删除登出的用户，维护在线用户名单
+// 刪除登出用戶，維護用戶列表
 func del(slice []string, user string) []string {
 	count := len(slice)
 	if count == 0 {

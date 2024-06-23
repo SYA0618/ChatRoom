@@ -10,17 +10,17 @@ import (
 
 func main() {
 	router := mux.NewRouter()
-	//开启协程启动connection服务管理中心
+	//執行Connection
 	go h.run()
-	//创建ws服务
+	//創建websocket服務
 	router.HandleFunc("/ws", myws)
-	//启动http服务
+	//啟動http服務
 	if err := http.ListenAndServe("0.0.0.0:8083", router); err != nil {
 		fmt.Println("err:", err)
 	}
 }
 
-// 用户中心，维护多个用户的connection
+// 用戶中心，維護多個用戶的connection
 var h = hub{
 	c: make(map[*connection]bool),
 	u: make(chan *connection),
@@ -29,11 +29,11 @@ var h = hub{
 }
 
 type hub struct {
-	//当前在线connection信息
+	//當前在線connection訊息
 	c map[*connection]bool
 	//删除connection
 	u chan *connection
-	//传递数据
+	//傳遞數據
 	b chan []byte
 	//加入connection
 	r chan *connection
@@ -42,28 +42,28 @@ type hub struct {
 func (h *hub) run() {
 	for {
 		select {
-		//用户连接，添加connection信息
+		//用戶連接，添加connection訊息
 		case c := <-h.r:
 			h.c[c] = true
 			c.data.Ip = c.ws.RemoteAddr().String()
 			c.data.Type = "handshake"
 			c.data.UserList = user_list
 			data_b, _ := json.Marshal(c.data)
-			//发送给写入器
+			//發送給寫入器
 			c.sc <- data_b
-		//删除指定用户连接
+		//刪除指定用戶連接
 		case c := <-h.u:
 			if _, ok := h.c[c]; ok {
 				delete(h.c, c)
 				close(c.sc)
 			}
-		//向聊天室在线人员发送信息
+		//向聊天室在線用戶發送訊息
 		case data := <-h.b:
 			for c := range h.c {
 				select {
-				//发送数据
+				//發送數據
 				case c.sc <- data:
-				//发送不成功则删除connection信息
+				//發送不成功則刪除connection訊息
 				default:
 					delete(h.c, c)
 					close(c.sc)

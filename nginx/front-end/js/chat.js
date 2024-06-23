@@ -1,7 +1,7 @@
-var uname = prompt('请输入用户名', 'user' + uuid(8, 16));
+var uname = sessionStorage.getItem('user_name');
 var ws = new WebSocket("ws://127.0.0.1:8083/ws");
 ws.onopen = function () {
-    var data = "系統消息:已連線";
+    var data = "System Notification: Connected.";
     listMsg(data);
 };
 ws.onmessage = function (e) {
@@ -9,7 +9,7 @@ ws.onmessage = function (e) {
     var sender, user_name, name_list, change_type;
     switch (msg.type) {
         case 'system':
-            sender = '系统消息: ';
+            sender = 'System Notification: ';
             break;
         case 'user':
             sender = msg.from + ': ';
@@ -30,7 +30,7 @@ ws.onmessage = function (e) {
     listMsg(data);
 };
 ws.onerror = function () {
-    var data = "系统消息 : 出错了,请退出重试.";
+    var data = "System Notification: Page error, please refresh.";
     listMsg(data);
 };
 function confirm(event) {
@@ -70,30 +70,11 @@ function dealUser(user_name, type, name_list) {
     }
     user_num.innerHTML = name_list.length;
     user_list.scrollTop = user_list.scrollHeight;
-    var change = type == 'login' ? '上线' : '下线';
-    var data = '系统消息: ' + user_name + ' 已' + change;
+    var change = type == 'login' ? 'online' : 'offline';
+    var data = 'System Notification: ' + user_name + ' is ' + change;
     listMsg(data);
 }
 function sendMsg(msg) {
     var data = JSON.stringify(msg);
     ws.send(data);
-}
-function uuid(len, radix) {
-    var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
-    var uuid = [], i;
-    radix = radix || chars.length;
-    if (len) {
-        for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * radix];
-    } else {
-        var r;
-        uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
-        uuid[14] = '4';
-        for (i = 0; i < 36; i++) {
-            if (!uuid[i]) {
-                r = 0 | Math.random() * 16;
-                uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
-            }
-        }
-    }
-    return uuid.join('');
 }

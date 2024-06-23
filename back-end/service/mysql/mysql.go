@@ -20,6 +20,7 @@ func Init() error {
 	host := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", user, password, db_host, db_port, db_name)
 	d, err := sql.Open("mysql", host)
 	db = d
+	fmt.Println(err)
 	return err
 }
 
