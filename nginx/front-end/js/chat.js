@@ -1,45 +1,80 @@
-window.onload = function() {
-    var conn;
-    var msg = document.getElementById("msg")
-    var chat = document.getElementById("chat")
-
-    function appendChat(item) {
-        var doScroll = chat.scrollTop > chat.scrollHeight - chat.clientHeight - 1;
-        chat.appendChild(item);
-        if (doScroll) {
-            chat.scrollTop = chat.scrollHeight - chat.clientHeight;
-        }
+var uname = sessionStorage.getItem('user_name');
+var ws = new WebSocket("ws://127.0.0.1:8083/ws");
+ws.onopen = function () {
+    var data = "System Notification: Connected.";
+    listMsg(data);
+};
+ws.onmessage = function (e) {
+    var msg = JSON.parse(e.data);
+    var sender, user_name, name_list, change_type;
+    switch (msg.type) {
+        case 'system':
+            sender = 'System Notification: ';
+            break;
+        case 'user':
+            sender = msg.from + ': ';
+            break;
+        case 'handshake':
+            var user_info = {'type': 'login', 'content': uname};
+            sendMsg(user_info);
+            return;
+        case 'login':
+        case 'logout':
+            user_name = msg.content;
+            name_list = msg.user_list;
+            change_type = msg.type;
+            dealUser(user_name, change_type, name_list);
+            return;
     }
-    document.getElementById("form").onsubmit = function () {
-        if (!conn) {
-            return false;
-        }
-        if (!msg.value) {
-            return false;
-        }
-        conn.send(msg.value);
-        msg.value = "";
-        return false;
-    };
-
-    if (window["WebSocket"]) {
-        conn = new WebSocket("ws://" + document.location.host + "/ws");
-        conn.onclose = function (evt) {
-            var item = document.createElement("div");
-            item.innerHTML = "<b>Connection closed.</b>";
-            appendChat(item);
-        };
-        conn.onmessage = function (evt) {
-            var messages = evt.data.split('\n');
-            for (var i = 0; i < messages.length; i++) {
-                var item = document.createElement("div");
-                item.innerText = messages[i];
-                appendChat(item);
-            }
-        };
+    var data = sender + msg.content;
+    listMsg(data);
+};
+ws.onerror = function () {
+    var data = "System Notification: Page error, please refresh.";
+    listMsg(data);
+};
+function confirm(event) {
+    var key_num = event.keyCode;
+    if (13 == key_num) {
+        send();
     } else {
-        var item = document.createElement("div");
-        item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
-        appendChat(item);
+        return false;
     }
+}
+function send() {
+    var msg_box = document.getElementById("msg");
+    var content = msg_box.value;
+    var reg = new RegExp("\r\n", "g");
+    content = content.replace(reg, "");
+    var msg = {'content': content.trim(), 'type': 'user'};
+    sendMsg(msg);
+    msg_box.value = '';
+}
+function listMsg(data) {
+    var msg_list = document.getElementById("chat");
+    var msg = document.createElement("p");
+    msg.innerHTML = data;
+    msg_list.appendChild(msg);
+    msg_list.scrollTop = msg_list.scrollHeight;
+}
+function dealUser(user_name, type, name_list) {
+    var user_list = document.getElementById("user_list");
+    var user_num = document.getElementById("user_num");
+    while(user_list.hasChildNodes()) {
+        user_list.removeChild(user_list.firstChild);
+    }
+    for (var index in name_list) {
+        var user = document.createElement("p");
+        user.innerHTML = name_list[index];
+        user_list.appendChild(user);
+    }
+    user_num.innerHTML = name_list.length;
+    user_list.scrollTop = user_list.scrollHeight;
+    var change = type == 'login' ? 'online' : 'offline';
+    var data = 'System Notification: ' + user_name + ' is ' + change;
+    listMsg(data);
+}
+function sendMsg(msg) {
+    var data = JSON.stringify(msg);
+    ws.send(data);
 }
