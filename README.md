@@ -16,7 +16,7 @@
 ### Front-End
 ![Front](./assets/Login.png)
 
-### RESTful API (Gin Swagger)
+### Gin Swagger API Document
 ![RESTful](./assets/RESTful.png)
 
 ### Chat Room
