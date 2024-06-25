@@ -11,6 +11,9 @@
 - 使用 Go routine 以及 Go channel 建立聊天室
 
 ## 🏗️ Architecture
+### Chat Room
+![CharArch](./assets/ChatArch.png)
+
 
 ## 🎉 Demonstrate
 ### Front-End
