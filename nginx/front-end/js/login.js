@@ -65,14 +65,14 @@ inputPassword.addEventListener('blur', () => {
   }
 });
 
-// 获取错误消息元素
+// 獲取錯誤訊息
 var loginError = document.getElementById('login-error');
-// 在某些条件下显示错误消息
+// 條件成立顯示錯誤消息
 function showError() {
   loginError.style.visibility = 'visible';
   inputPassword.value = '';
 }
-// 在某些条件下隐藏错误消息
+// 條件成立隱藏錯誤消息
 function hideError() {
   loginError.style.visibility = 'hidden';
 }

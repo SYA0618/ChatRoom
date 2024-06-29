@@ -8,14 +8,14 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-// 用户连接结构体
+// 用戶連接
 type connection struct {
 	ws   *websocket.Conn
 	sc   chan []byte
 	data *Data
 }
 
-// 用户在线名单列表
+// 用戶在線名單
 var user_list = []string{}
 
 type Data struct {
