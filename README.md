@@ -9,6 +9,7 @@
 - 使用 Docker compose 部署至正式環境
 - 使用 GO gin 建立網頁後端
 - 使用 Go routine 以及 Go channel 建立聊天室
+- 使用 JWT token 進行認證
 
 ## 🏗️ Architecture
 ### Chat Room
