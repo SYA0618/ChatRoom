@@ -1,5 +1,15 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/index.html';
+    } else {
+        document.getElementById('welcome-message').textContent = 'Welcome!';
+    }
+});
+
 var uname = sessionStorage.getItem('user_name');
 var ws = new WebSocket("ws://127.0.0.1:8083/ws");
+
 ws.onopen = function () {
     var data = "System Notification: Connected.";
     listMsg(data);

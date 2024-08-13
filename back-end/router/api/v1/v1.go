@@ -25,7 +25,12 @@ func Login(c *gin.Context) {
 	c.Bind(&user)
 	user.Password = middlewares.Sha256(user.Password)
 	if user.CheckUser() {
-		c.String(http.StatusOK, "Hello %s", user.User)
+		var jwtSecret = []byte("secret")
+		claims := middlewares.CreateDemoToken(user.User, jwtSecret)
+		c.JSON(http.StatusOK, gin.H{
+			"message": "Hello " + user.User,
+			"token":   claims,
+		})
 	} else {
 		c.String(http.StatusUnauthorized, "")
 	}

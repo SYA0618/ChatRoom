@@ -23,7 +23,9 @@ function submitForm() {
   axios.post(path, data)
     .then(res => {
       console.log(res);
+      console.log(res.data.token);
       sessionStorage.setItem('user_name', username);
+      localStorage.setItem('token', res.data.token);
       window.location.href = '/welcome.html';
     })
     .catch(err => {
@@ -78,3 +80,4 @@ function hideError() {
 }
 
 
+document.getElementById('remember')
